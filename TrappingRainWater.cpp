@@ -18,26 +18,6 @@ int calculate(int N, int A[], int a, int b) {
     return sum;
 }
 
-int sweepLeft(int N, int A[], int right) {
-    if(right <= 1)
-        return 0;
-    else {
-        int m = maxs(N, A, 0, right-1);
-        return sweepLeft(N, A, m)
-             + calculate(N, A, m, right);
-    }
-}
-
-int sweepRight(int N, int A[], int left) {
-    if(left >= N-2)
-        return 0;
-    else {
-        int m = maxs(N, A, left+1, N-1);
-        return sweepRight(N, A, m)
-             + calculate(N, A, left, m);
-    }
-}
-
 int main() {
     int T;
 
@@ -51,7 +31,26 @@ int main() {
         for(int i = 0; i < N; i++)
             cin >> A[i];
 
-        int m = maxs(N, A, 0, N-1);
-        cout << sweepLeft(N, A, m) + sweepRight(N, A, m) << endl;
+        int mi[N];
+
+        int p = maxs(N, A, 0, N-1);
+
+        mi[0] = 0;
+        for(int i=1; i<p; i++)
+            mi[i] = A[i] >= A[mi[i-1]] ? i : mi[i-1];
+
+        mi[N-1] = N-1;
+        for(int i=N-2; i>p; i--)
+            mi[i] = A[i] >= A[mi[i+1]] ? i : mi[i+1];
+
+        int sum = 0;
+
+        for(int i = p; i > 1; i = mi[i-1])
+            sum += calculate(N, A, mi[i-1], i);
+
+        for(int i = p; i < N-1; i = mi[i+1])
+            sum += calculate(N, A, i, mi[i+1]);
+
+        cout << sum << endl;
     }
 }
