@@ -18,8 +18,8 @@ template<typename T> vector<T> sliding_window_maxima(vector<T> const& A, int k) 
     maxima.reserve(A.size() - k + 1);
 
     for(int i = 0; i < A.size(); i++) {
-        // Remove the biggest leaders who are out of the window
-        while(!Q.empty() && Q.front() <= i - k)
+        // Remove the biggest leader if it is out of the window
+        if(!Q.empty() && Q.front() <= i - k)
             Q.pop_front();
 
         // Remove the lower leaders who are smaller than the next element
