@@ -3,6 +3,17 @@
 
 using namespace std;
 
+// https://www.spoj.com/problems/INVCNT/
+
+/*
+    inversion_count (time complexity: O(n log n), space complexity: O(n log n))
+        Uses a slightly modified version of merge sort to count
+        the number of inversions performed on the vector to sort it.
+        The number of inversions is calculated by summing the divide-et-impera
+        recursion results of merge sort and by finally adding the inversions
+        required to merge the two arrays.
+*/
+
 template<typename T> size_t merge(vector<T>& A, size_t low, size_t mid, size_t high) {
     vector<T> temp(high - low);
 
@@ -31,7 +42,7 @@ template<typename T> size_t merge(vector<T>& A, size_t low, size_t mid, size_t h
 template<typename T> size_t merge_sort(vector<T>& A, size_t low, size_t high) {
     size_t count = 0;
     if(high - low > 1) {
-        size_t mid = low + (high - low)/2;
+        size_t mid = low + (high - low)/2; // Avoids overflow
         count += merge_sort(A, low, mid);
         count += merge_sort(A, mid, high);
         count += merge(A, low, mid, high);
