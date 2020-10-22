@@ -33,10 +33,19 @@ All tested code is available on this repository and all solutions have been test
 
 ![65536, double up](results/all.png)
 
-## Overtaking of `merge` over `fenwick-perm`
+## Overtaking of `merge` over `fenwick-perm` (increase by 1024 up to 1,048,576)
 
 ![Overtake of `merge` over `fenwick-perm`](results/overtake.png)
 
 # Specs
 
 Compiled with `g++ -O3`, gcc version 8.3.0 (Debian 8.3.0-6), [Google Benchmark](https://github.com/google/benchmark) 1.5.2, tested on a Intel(R) Core(TM) i7-7500U CPU @ 2.70 GHz / 2.90 GHz, 4 cores using WSL2.
+Cache and CPU reported by Google Benchmark:
+```
+Run on (4 X 2904 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x2)
+  L1 Instruction 32 KiB (x2)
+  L2 Unified 256 KiB (x2)
+  L3 Unified 4096 KiB (x1)
+```
