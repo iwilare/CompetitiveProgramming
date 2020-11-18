@@ -30,41 +30,35 @@ template<typename T> vector<tuple<T, size_t>> index(vector<T>& A) {
 }
 
 template<typename T> vector<size_t> remap(vector<T>& A) {
-    vector<pair<T, size_t>> indexed(A.size());
-    for(size_t i = 0; i < A.size(); i++)
-        indexed[i] = make_pair(A[i], i);
+    auto indexed = index(A);
 
     sort(indexed.begin(), indexed.end());
 
     vector<size_t> remapped(A.size());
-    size_t index = 0;
-    for(size_t i = 0; i < indexed.size(); i++) {
-        auto v = indexed[i].first;
-        // Remap with equal rankings
-        while(v == indexed[i].first)
-            remapped[indexed[i++].second] = index;
-        index++;
-        i--;
+    for(size_t i = 0, remap = 0; i < indexed.size(); remap++) {
+        auto v = get<0>(indexed[i]);
+        while(i < indexed.size() && v == get<0>(indexed[i]))
+            remapped[get<1>(indexed[i++])] = remap;
     }
 
     return remapped;
 }
 
-template<typename T> vector<T> mo_algorithm(vector<tuple<size_t, size_t>>& Q,
-                                            function<void(int64_t)> const& Add,
-                                            function<void(int64_t)> const& Remove,
-                                            function<T()>           const& Answer) {
-    size_t bucket = (size_t)sqrt(Q.size());
+template<typename T, typename Q> vector<T> mo_algorithm(size_t vector_size,
+                                                        vector<Q>& queries,
+                                                        function<void(size_t)> const& Add,
+                                                        function<void(size_t)> const& Remove,
+                                                        function<T(Q)>         const& Answer) {
+    size_t bucket = (size_t)sqrt(vector_size);
 
-    auto Qi = index(Q);
+    auto Qi = index(queries);
     sort(Qi.begin(), Qi.end(), [&](auto ai, auto bi) {
         auto a = get<0>(ai), b = get<0>(bi);
-        return get<0>(a)/bucket != get<0>(b)/bucket
-             ? get<0>(a)/bucket <  get<0>(b)/bucket
-             : get<1>(a) < get<1>(b);
+        return make_pair(get<0>(a)/bucket, get<1>(a))
+             < make_pair(get<0>(b)/bucket, get<1>(b));
     });
 
-    int64_t a = 0, b = 0;
+    size_t a = 0, b = 0;
     vector<T> answers(Qi.size());
     Add(0);
     for(auto const& qi : Qi) {
@@ -77,7 +71,7 @@ template<typename T> vector<T> mo_algorithm(vector<tuple<size_t, size_t>>& Q,
             Add(++b);
         while(b > get<1>(q))
             Remove(b--);
-        answers[get<1>(qi)] = Answer();
+        answers[get<1>(qi)] = Answer(q);
     }
     return answers;
 }
@@ -91,25 +85,25 @@ template<typename T> vector<T> powerful_array(vector<T>& A, vector<tuple<size_t,
     vector<int64_t> frequencies(A_remap.size());
     frequencies.reserve(A.size());
 
-    const auto Add = [&](int64_t i) {
+    const auto Add = [&](size_t i) {
         // Undo previous contribution
         answer -= frequencies[A_remap[i]] * frequencies[A_remap[i]] * A[i];
         // Do current contribution
         frequencies[A_remap[i]]++;
         answer += frequencies[A_remap[i]] * frequencies[A_remap[i]] * A[i];
     };
-    const auto Remove = [&](int64_t i) {
+    const auto Remove = [&](size_t i) {
         // Undo current contribution
         answer -= frequencies[A_remap[i]] * frequencies[A_remap[i]] * A[i];
         frequencies[A_remap[i]]--;
         // Redo previous contribution
         answer += frequencies[A_remap[i]] * frequencies[A_remap[i]] * A[i];
     };
-    const auto Answer = [&]() {
+    const auto Answer = [&](auto i) {
         return answer;
     };
 
-    return mo_algorithm<T>(Q, Add, Remove, Answer);
+    return mo_algorithm<T, tuple<size_t, size_t>>(A.size(), Q, Add, Remove, Answer);
 }
 
 template<typename T> vector<T> read_sequence(size_t n) {
@@ -124,7 +118,7 @@ template<typename L, typename R> vector<tuple<L, R>> read_sequence2(size_t n) {
     input.reserve(n);
     for(size_t i = 0; i < n; i++) {
         L a; R b;
-        scanf("%I64d%I64d", &a, &b);
+        scanf("%I64u%I64u", &a, &b);
         input.emplace_back(a-1, b-1); // Queries start at one, apparently
     }
     return input;
