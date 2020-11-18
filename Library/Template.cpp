@@ -24,21 +24,15 @@ template<typename T> vector<tuple<T, size_t>> index(vector<T>& A) {
 }
 
 template<typename T> vector<size_t> remap(vector<T>& A) {
-    vector<pair<T, size_t>> indexed(A.size());
-    for(size_t i = 0; i < A.size(); i++)
-        indexed[i] = make_pair(A[i], i);
+    auto indexed = index(A);
 
     sort(indexed.begin(), indexed.end());
 
     vector<size_t> remapped(A.size());
-    size_t remap = 0;
-    for(size_t i = 0; i < indexed.size(); i++) {
-        auto v = indexed[i].first;
-        // Remap with equal rankings
-        while(v == indexed[i].first)
-            remapped[indexed[i++].second] = remap;
-        remap++;
-        i--;
+    for(size_t i = 0, remap = 0; i < indexed.size(); remap++) {
+        auto v = get<0>(indexed[i]);
+        while(i < indexed.size() && v == get<0>(indexed[i]))
+            remapped[get<1>(indexed[i++])] = remap;
     }
 
     return remapped;
@@ -90,7 +84,7 @@ int main() {
 
     auto A = read_sequence<int64_t>(N);
     auto A = read_sequence2<int64_t, int64_t>(N);
-    auto A = read_sequence2<int64_t, int64_t, int64_t>(N);
+    auto A = read_sequence3<int64_t, int64_t, int64_t>(N);
 
     exercise<int64_t>(A);
     exercise<int64_t, int64_t>(A);
