@@ -1,6 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <deque>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -13,7 +11,9 @@ using namespace std;
         are removed from the stack. As a consequence, the stack will always be decreasingly ordered.
         The elements still waiting in the stack will have no next greater element.
 */
-template<typename T> vector<T> next_larger_element(vector<T> const& A) {
+template<typename T> vector<T> nextLargerElement(T arr[], int n){
+    vector<T> A(arr, arr + n);
+
     vector<T> nexts(A.size());
     fill(nexts.begin(), nexts.end(), -1);
 
@@ -31,30 +31,4 @@ template<typename T> vector<T> next_larger_element(vector<T> const& A) {
     }
 
     return nexts;
-}
-
-int main() {
-    int T;
-    cin >> T;
-
-    for(int t = 0; t < T; t++) {
-        int N;
-        cin >> N;
-
-        vector<int64_t> A;
-        A.reserve(N);
-        for(int i = 0; i < N; i++) {
-            int64_t x;
-            cin >> x;
-            A.push_back(x);
-        }
-
-        auto result = next_larger_element(A);
-
-        for(auto const& v : result) {
-            cout << v << " ";
-        }
-
-        cout << endl;
-    }
 }

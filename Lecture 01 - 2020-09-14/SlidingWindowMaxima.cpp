@@ -1,6 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <deque>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -12,9 +10,11 @@ using namespace std;
         A deque is used to maintain an ordered list of the right leaders
         present in the window and achieve optimal complexity.
 */
-template<typename T> vector<T> sliding_window_maxima(vector<T> const& A, int k) {
-    deque<T> Q; // A queue of indices, maintaining the highest leader at the front
-    vector<T> maxima;
+vector<int> max_of_subarrays(int *arr, int n, int k) {
+    vector<int> A(arr, arr + n);
+
+    deque<int> Q; // A queue of indices, maintaining the highest leader at the front
+    vector<int> maxima;
     maxima.reserve(A.size() - k + 1);
 
     for(int i = 0; i < A.size(); i++) {
@@ -34,32 +34,4 @@ template<typename T> vector<T> sliding_window_maxima(vector<T> const& A, int k) 
     }
 
     return maxima;
-}
-
-int main() {
-    int T;
-    cin >> T;
-
-    for(int t = 0; t < T; t++) {
-        int N;
-        cin >> N;
-
-        int K;
-        cin >> K;
-
-        vector<int> A;
-        A.reserve(N);
-        for(int i = 0; i < N; i++) {
-            int x;
-            cin >> x;
-            A.push_back(x);
-        }
-
-        vector<int> result = sliding_window_maxima(A, K);
-
-        for(auto const& v : result)
-            cout << v << " ";
-
-        cout << endl;
-    }
 }
