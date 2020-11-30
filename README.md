@@ -21,7 +21,7 @@
 | Lecture 15 - 2020-11-11 | |
 | Lecture 16 - 2020-11-16 | [PowerfulArray][PowerfulArray], [TreeAndQueries][TreeAndQueries] |
 | Lecture 17 - 2020-11-18 | [Knapsack][Knapsack], [LongestCommonSubsequence][LongestCommonSubsequence] |
-| Lecture 18 - 2020-11-23 | [EditDistance][EditDistance], [SubsetSum][SubsetSum] |
+| Lecture 18 - 2020-11-23 | [EditDistance][EditDistance], [MinimumNumberOfJumps][MinimumNumberOfJumps], [SubsetSum][SubsetSum] |
 
 [Kadane]:                    http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2001%20-%202020-09-14/Kadane.cpp
 [Leaders]:                   http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2001%20-%202020-09-14/Leaders.cpp
@@ -51,5 +51,6 @@
 [TreeAndQueries]:            http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2016%20-%202020-11-16/TreeAndQueries.cpp
 [Knapsack]:                  http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2017%20-%202020-11-18/Knapsack.cpp
 [LongestCommonSubsequence]:  http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2017%20-%202020-11-18/LongestCommonSubsequence.cpp
-[EditDistance]:              http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2001%20-%202020-09-14/EditDistance.cpp
+[EditDistance]:              http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2001%20-%202020-11-23/EditDistance.cpp
+[MinimumNumberOfJumps]:      http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2001%20-%202020-11-23/MinimumNumberOfJumps.cpp
 [SubsetSum]:                 http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2018%20-%202020-11-23/SubsetSum.cpp
