@@ -7,7 +7,7 @@ using namespace std;
 /*
     equalPartition (time complexity: O(n * sum), space complexity: O(n * sum))
         First, calculates the total sum, and divides it by two.
-        Then, it uses a simple dynamic recursive bottom-up approach to
+        Then, it uses a simple dynamic bottom-up approach to
         search for a subset that sums up to half the total sum.
         The size of the matrix is proportional to the number of the elements
         and the numerical value of (half) the sum of all the elements.
