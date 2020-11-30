@@ -1,11 +1,4 @@
-#include <algorithm>
-#include <cmath>
-#include <functional>
-#include <iostream>
-#include <map>
-#include <set>
-#include <unordered_map>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -46,24 +39,16 @@ template<typename T> vector<T> read_sequence(size_t n) {
 }
 
 template<typename L, typename R> vector<tuple<L, R>> read_sequence2(size_t n) {
-    vector<tuple<L, R>> input;
-    input.reserve(n);
-    for(size_t i = 0; i < n; i++) {
-        L a; R b;
-        cin >> a >> b;
-        input.emplace_back(a, b);
-    }
+    vector<tuple<L, R>> input(n);
+    for(size_t i = 0; i < n; i++)
+        cin >> get<0>(input[i]) >> get<1>(input[i]);
     return input;
 }
 
 template<typename A, typename B, typename C> vector<tuple<A, B, C>> read_sequence3(size_t n) {
-    vector<tuple<A, B, C>> input;
-    input.reserve(n);
-    for(size_t i = 0; i < n; i++) {
-        A a; B b; C c;
-        cin >> a >> b >> c;
-        input.emplace_back(a, b, c);
-    }
+    vector<tuple<A, B, C>> input(n);
+    for(size_t i = 0; i < n; i++)
+        cin >> get<0>(input[i]) >> get<1>(input[i]) >> get<2>(input[i]);
     return input;
 }
 

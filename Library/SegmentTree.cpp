@@ -1,9 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <tuple>
-#include <functional>
-#include <cmath>
+#include <bits/stdc++.h>
 
 #define LEFT(i)  (2 * (i) + 1)
 #define RIGHT(i) (2 * (i) + 2)
