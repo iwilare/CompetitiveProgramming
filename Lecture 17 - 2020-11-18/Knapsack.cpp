@@ -5,45 +5,29 @@ using namespace std;
 // https://www.spoj.com/problems/KNAPSACK/
 
 /*
-    knapsack (time complexity: O(n^2), space complexity: O(n^2))
-        Uses a simple dynamic recursive top-down approach to
-        memoize the knapsack results in a matrix, according to the
+    knapsack (time complexity: O(backpack * |items|), space complexity: O(backpack * |items|))
+        Uses a simple dynamic bottom-up approach to memoize
+        the sub-knapsack results in a matrix, according to the
         knapsack remaining size and the remaining items to be
         considered.
 */
 
 template<typename T> T knapsack(int64_t backpack, vector<tuple<int64_t, T>>& items) {
-    vector<vector<T>> memo(backpack + 1, vector<T>(items.size() + 1, -1));
+    T m[backpack + 1][items.size() + 1];
 
-    function<T(int64_t,int64_t)> knapsack_ = [&](int64_t backpack, int64_t items_size) {
-        if(memo[backpack][items_size] != -1)
-            return memo[backpack][items_size];
-        else {
-            int return_;
-            if(items_size == 0)
-                return_ = 0;
-            else {
-                auto remaining = backpack - get<0>(items[items_size-1]);
-                auto value = get<1>(items[items_size-1]);
-                return_ = max(remaining < 0 ? 0
-                             : knapsack_(remaining, items_size-1) + value,
-                               knapsack_(backpack,  items_size-1));
-            }
-            return (memo[backpack][items_size] = return_);
-        }
-    };
+    for(int64_t b = 0; b <= backpack; b++)
+        for(int64_t i = 0; i <= items.size(); i++)
+            m[b][i] = b == 0 || i == 0 ? 0
+                    : max(m[b][i-1],   b - get<0>(items[i-1]) < 0 ? 0
+                                   : m[b - get<0>(items[i-1])][i-1] + get<1>(items[i-1]));
 
-    return knapsack_(backpack, items.size());
+    return m[backpack][items.size()];
 }
 
 template<typename L, typename R> vector<tuple<L, R>> read_sequence2(int64_t n) {
-    vector<tuple<L, R>> input;
-    input.reserve(n);
-    for(int64_t i = 0; i < n; i++) {
-        L a; R b;
-        cin >> a >> b;
-        input.emplace_back(a, b);
-    }
+    vector<tuple<L, R>> input(n);
+    for(size_t i = 0; i < n; i++)
+        cin >> get<0>(input[i]) >> get<1>(input[i]);
     return input;
 }
 
