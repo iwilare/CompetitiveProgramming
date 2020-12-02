@@ -20,8 +20,11 @@
 | Lecture 14 - 2020-11-09 | [SmallerValues][SmallerValues], [Triplets][Triplets] |
 | Lecture 15 - 2020-11-11 | |
 | Lecture 16 - 2020-11-16 | [PowerfulArray][PowerfulArray], [TreeAndQueries][TreeAndQueries] |
-| Lecture 17 - 2020-11-18 | [Knapsack][Knapsack], [LongestCommonSubsequence][LongestCommonSubsequence] |
-| Lecture 18 - 2020-11-23 | [EditDistance][EditDistance], [MinimumNumberOfJumps][MinimumNumberOfJumps], [SubsetSum][SubsetSum] |
+| Lecture 17 - 2020-11-18 | [LongestCommonSubsequence][LongestCommonSubsequence] |
+| Lecture 18 - 2020-11-23 | [MinimumNumberOfJumps][MinimumNumberOfJumps]
+| Lecture 19 - 2020-11-30 | [Knapsack][Knapsack], [SubsetSum][SubsetSum] |
+| Lecture 20 - 2020-12-02 | |
+| Lecture 21 - 2020-12-07 | [EditDistance][EditDistance] |
 
 [Kadane]:                    http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2001%20-%202020-09-14/Kadane.cpp
 [Leaders]:                   http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2001%20-%202020-09-14/Leaders.cpp
@@ -49,8 +52,8 @@
 [Triplets]:                  http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2014%20-%202020-11-09/Triplets.cpp
 [PowerfulArray]:             http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2016%20-%202020-11-16/PowerfulArray.cpp
 [TreeAndQueries]:            http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2016%20-%202020-11-16/TreeAndQueries.cpp
-[Knapsack]:                  http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2017%20-%202020-11-18/Knapsack.cpp
 [LongestCommonSubsequence]:  http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2017%20-%202020-11-18/LongestCommonSubsequence.cpp
-[EditDistance]:              http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2001%20-%202020-11-23/EditDistance.cpp
-[MinimumNumberOfJumps]:      http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2001%20-%202020-11-23/MinimumNumberOfJumps.cpp
-[SubsetSum]:                 http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2018%20-%202020-11-23/SubsetSum.cpp
+[MinimumNumberOfJumps]:      http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2018%20-%202020-11-23/MinimumNumberOfJumps.cpp
+[Knapsack]:                  http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2019%20-%202020-11-30/Knapsack.cpp
+[SubsetSum]:                 http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2019%20-%202020-11-30/SubsetSum.cpp
+[EditDistance]:              http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2021%20-%202020-12-07/EditDistance.cpp
