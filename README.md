@@ -25,6 +25,7 @@
 | Lecture 19 - 2020-11-30 | [Knapsack][Knapsack], [SubsetSum][SubsetSum] |
 | Lecture 20 - 2020-12-02 | [LongestBitonicSubsequence][LongestBitonicSubsequence], [LongestIncreasingSubsequence][LongestIncreasingSubsequence] |
 | Lecture 21 - 2020-12-07 | [EditDistance][EditDistance], [LongestPalindromicSubsequence][LongestPalindromicSubsequence], [VertexCover][VertexCover] |
+| Lecture 22 - 2020-12-09 | [AlternativeThinking][AlternativeThinking], [MagicNumbers][MagicNumbers], [MeetingsInOnRoom][MeetingsInOnRoom], [WilburAndArray][WilburAndArray] |
 
 [Kadane]:                        http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2001%20-%202020-09-14/Kadane.cpp
 [Leaders]:                       http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2001%20-%202020-09-14/Leaders.cpp
@@ -61,3 +62,7 @@
 [EditDistance]:                  http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2021%20-%202020-12-07/EditDistance.cpp
 [LongestPalindromicSubsequence]: http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2021%20-%202020-12-07/LongestPalindromicSubsequence.cpp
 [VertexCover]:                   http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2021%20-%202020-12-07/VertexCover.cpp
+[AlternativeThinking]:           http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2022%20-%202020-12-09/AlternativeThinking.cpp
+[MagicNumbers]:                  http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2022%20-%202020-12-09/MagicNumbers.cpp
+[MeetingsInOnRoom]:              http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2022%20-%202020-12-09/MeetingsInOnRoom.cpp
+[WilburAndArray]:                http://github.com/iwilare/CompetitiveProgramming/blob/master/Lecture%2022%20-%202020-12-09/WilburAndArray.cpp
