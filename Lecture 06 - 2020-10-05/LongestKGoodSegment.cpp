@@ -1,47 +1,53 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <map>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 // https://codeforces.com/contest/616/problem/D?locale=en
 
 /*
-    longest_k_good_segment (time complexity: O(n log k), space complexity: O(k))
-        Uses two ordered maps to bidirectionally associate values with the
-        the last index encountered. When a new value out of the current K-window
-        is found, the element with the minimum last index is removed. Otherwise,
-        the index of the corresponding element is updated to the current position.
+    longest_k_good_segment (time complexity: O(n), space complexity: O(k))
+        Uses an unordered map (assuming constant time operations) to maintain a
+        list of all the elements in the map, and associating them with their frequencies.
+        Then, the array is scanned linearly while keeping two pointers; if the size of
+        the map is smaller than K, the right pointer is advanced. When the map reaches
+        size K, the left pointer is moved until there are no more than K different elements
+        within the map. The map is updated accordingly in both cases, with the length
+        of the window being tracked for the maximum.
 */
 
-pair<size_t, size_t> longest_k_good_segment(vector<int64_t> A, int64_t K) {
-    map<int64_t, size_t> lastAppearance;
-    map<size_t, int64_t> appearanceElem;
+pair<int, int> longest_k_good_segment(vector<int> A, int K) {
+    unordered_map<int, int> window;
+    // There will always be at most K+1 elements, K+1 before shrinking it again.
+    window.reserve(K + 1);
 
-    size_t maxStart = 0, maxEnd = 0, maxLength = 0;
-    size_t start = 0;
-    for(size_t i = 0; i < A.size(); i++) {
-        if(lastAppearance.size() == K && lastAppearance.find(A[i]) == lastAppearance.end()) {
-            auto minLast = *appearanceElem.begin();
-            start = minLast.first + 1;
-            appearanceElem.erase(minLast.first);
-            lastAppearance.erase(minLast.second);
-        }
+    auto left       = A.begin();
+    auto right      = A.begin();
+    int  max_length = 0;
+    auto max_left   = A.end();
+    auto max_right  = A.end();
 
-        if(lastAppearance.find(A[i]) != lastAppearance.end())
-            appearanceElem.erase(lastAppearance[A[i]]);
-        lastAppearance[A[i]] = i;
-        appearanceElem[i] = A[i];
+    while(right != A.end()) {
+        // Move the end of the window to the right,
+        // and insert the corresponding element.
+        ++window[*right];
+        ++right;
 
-        if(i - start + 1 > maxLength) {
-            maxStart = start;
-            maxEnd = i;
-            maxLength = i - start + 1;
+        // Ensure again that the window size does not exceed K distinct elements;
+        for(; window.size() > K; ++left)
+            // if so, keep removing left elements until the invariant is restored.
+            if(--window[*left] == 0)
+                window.erase(*left);
+
+        // Update the maximum if necessary.
+        if(right - left > max_length) {
+            max_length = right - left;
+            max_left   = left;
+            max_right  = right;
         }
     }
 
-    return make_pair(maxStart + 1, maxEnd + 1); // Result is 1-based
+    // right does not include the new element, get the inclusive index with -1
+    return make_pair(max_left - A.begin(), max_right - 1 - A.begin());
 }
 
 template<typename T> vector<T> fast_read_sequence(size_t n) {
@@ -55,7 +61,7 @@ int main() {
     int N, K;
     scanf("%d%d", &N, &K);
 
-    auto result = longest_k_good_segment(fast_read_sequence<int64_t>(N), K);
+    auto result = longest_k_good_segment(fast_read_sequence<int>(N), K);
 
-    printf("%d %d\n", result.first, result.second);
+    printf("%d %d\n", result.first + 1, result.second + 1); // Result is 1-based
 }
