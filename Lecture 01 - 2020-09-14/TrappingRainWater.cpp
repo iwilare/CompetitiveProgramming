@@ -27,11 +27,12 @@ using namespace std;
             we simply update the maximum.
             This finally gets us to O(1) space complexity and O(n) time complexity.
 */
-template<typename T> int trapping_rain_water(vector<T> const& v) {
+int trappingWater(int arr[], int n) {
+    vector<int> v(arr, arr + n);
     // Find global maximum
     auto p = max_element(v.begin(), v.end()) - v.begin();
 
-    T sum = 0;
+    int sum = 0;
 
     // Calculate water from the beginning to the global maximum
     for(int i = 1, m = 0; i <= p; i++) {
@@ -48,24 +49,4 @@ template<typename T> int trapping_rain_water(vector<T> const& v) {
     }
 
     return sum;
-}
-
-int main() {
-    int T;
-    cin >> T;
-
-    for(int t = 0; t < T; t++) {
-        int N;
-        cin >> N;
-
-        vector<int> A;
-        A.reserve(N);
-        for(int i = 0; i < N; i++) {
-            int x;
-            cin >> x;
-            A.push_back(x);
-        }
-
-        cout << trapping_rain_water(A) << endl;
-    }
 }
