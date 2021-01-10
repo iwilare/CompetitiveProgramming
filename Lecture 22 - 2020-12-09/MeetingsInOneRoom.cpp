@@ -14,7 +14,7 @@ using namespace std;
         non-overlapping, updating the right end as we go.
 */
 
-void maxMeetings(int start[], int end[], int n) {
+int maxMeetings(int start[], int end[], int n) {
     vector<tuple<int, int, int>> meetings(n);
 
     for(int i = 0; i < n; i++)
@@ -24,14 +24,17 @@ void maxMeetings(int start[], int end[], int n) {
          [](tuple<int, int, int>& a, tuple<int, int, int>& b) {
             return get<1>(a) != get<1>(b)
                  ? get<1>(a) <  get<1>(b)
-                 : get<2>(a) <  get<2>(b); // The problem requires to pick the lowest meeting
+                 : get<2>(a) <  get<2>(b); // (In a previous version,)
+                                           // The problem required to pick the lowest meeting
          });
 
+    int count = 0;
     int last_end = 0;
     for(auto const& m : meetings) {
         if(get<0>(m) > last_end) {
-            cout << get<2>(m) << " ";
             last_end = get<1>(m);
+            count++;
         }
     }
+    return count;
 }
