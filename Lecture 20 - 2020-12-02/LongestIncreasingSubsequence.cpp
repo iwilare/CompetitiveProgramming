@@ -2,6 +2,8 @@
 
 using namespace std;
 
+// https://practice.geeksforgeeks.org/problems/longest-increasing-subsequence-1587115620/1
+
 /*
     longest_increasing_subsequence (time complexity: O(n log n), space complexity: O(n))
         Exploits the concept of dominant elements and a BST to keep
@@ -19,7 +21,7 @@ using namespace std;
 int longestSubsequence(int n, int a[]) {
     size_t m = 0;
     map<int, size_t> doms;
-    for(int i=0; i<n; i++) {
+    for(int i = 0; i < n; i++) {
         // Update LIS
         auto pred = doms.lower_bound(a[i]);
         size_t lis = 1 + (doms.size() > 0 && pred != doms.begin() ? (--pred)->second : 0);
