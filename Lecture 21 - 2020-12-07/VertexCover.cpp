@@ -6,7 +6,7 @@ using namespace std;
 
 /*
     vertex_cover (time complexity: O(n), space complexity: O(n))
-        Uses a dynamic top-down recursive to memoize in a vector
+        Uses a dynamic top-down recursive approach to memoize in a vector
         the maximum vertex cover size assignable to each node, for
         each node in the tree. Each memoization entry considers
         the case where the root is covered or not, with the
@@ -16,7 +16,7 @@ using namespace std;
         is covered, the children nodes can be either covered or not; the
         minimum of these two subcases is the solution of the subproblem.
         Each node is covered only once, so the complexity is essentially
-        proportional to the sum of all the node degrees.
+        proportional to the sum of all the node degrees, i.e.: the number of nodes.
 */
 
 istream& operator>>(istream& is, tuple<> &t) {
@@ -51,21 +51,30 @@ size_t vertex_cover(vector<tuple<size_t, size_t>>& edges) {
     }
 
     vector<vector<size_t>> memo(edges.size() + 1, vector<size_t>(2, 0));
+
+    // i is the index of the node being considered, s iff we choose to cover it.
     function<size_t(size_t, size_t, bool)> vertex_cover_node = [&](size_t parent, size_t i, bool s) -> size_t {
         if(memo[i][s] != 0) return memo[i][s];
 
+		// The total number of covered nodes of the current
+		// solution starts from counting the parent.
         size_t cover = s ? 1 : 0;
 
         for(auto const& e : tree[i])
-            if(e != parent) // Don't go back to the parent
+            // Ensure we are not going back to the parent.
+            if(e != parent)
+                // If the root is covered, the children can be both covered or not;
+                // pick the best option of the two.
                 cover += s ? min(vertex_cover_node(i, e, true), vertex_cover_node(i, e, false))
-                            :    vertex_cover_node(i, e, true); // The root is not covered, so all the children must be
+                           :     vertex_cover_node(i, e, true);
+                           // But if the root is not covered, all the children must be forcefully covered.
 
         return memo[i][s] = cover;
     };
 
+    // The root could be both cases, so check them both.
     return min(vertex_cover_node(-1, 0, true),
-               vertex_cover_node(-1, 0, false)); // The root could be both cases
+               vertex_cover_node(-1, 0, false));
 }
 
 int main() {
