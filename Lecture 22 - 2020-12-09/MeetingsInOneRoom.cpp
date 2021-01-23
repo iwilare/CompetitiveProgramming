@@ -20,18 +20,19 @@ int maxMeetings(int start[], int end[], int n) {
     for(int i = 0; i < n; i++)
         meetings[i] = make_tuple(start[i], end[i], i + 1);
 
+    // Sort according to the meetings' ending time
     sort(meetings.begin(), meetings.end(),
-         [](tuple<int, int, int>& a, tuple<int, int, int>& b) {
-            return get<1>(a) != get<1>(b)
-                 ? get<1>(a) <  get<1>(b)
-                 : get<2>(a) <  get<2>(b); // (In a previous version,)
-                                           // The problem required to pick the lowest meeting
+         [](auto& a, auto& b) {
+             return get<1>(a) < get<1>(b);
          });
 
     int count = 0;
     int last_end = 0;
     for(auto const& m : meetings) {
+        // If the current segment starts after the end of
+        // the last (i.e.: is not overlapping)
         if(get<0>(m) > last_end) {
+            // Then greedily select it and update the right end.
             last_end = get<1>(m);
             count++;
         }
