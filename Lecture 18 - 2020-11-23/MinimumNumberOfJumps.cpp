@@ -6,10 +6,16 @@ using namespace std;
 
 /*
     minJumps (time complexity: O(n), space complexity: O(1))
-        Implements a linear solution for this problem by progressively
-        keeping track of the maximum reachable point in the array
-        and the number of steps that can still be done to move forward,
-        starting from the left starting point.
+        Implements a linear solution by progressively keeping track
+        of the maximum reachable point in the array along with the
+        number of steps that can still be done to move forward.
+        If we reach the maximum reachable point, it means we have
+        not received any improvement in the number of steps we can make,
+        so there is no solution. Each time that the number of steps
+        reaches zero it means that a jump to a previous point must have
+        been made, so the walk continues again until the known maximum
+        reachable point is reached. When the end is reached, count one
+        final step to complete the traversal.
 */
 
 int minJumps(int arr[], int n) {
@@ -21,13 +27,12 @@ int minJumps(int arr[], int n) {
     for(int i = 0; i < n - 1; i++, steps--) {
         // Update the maximum reachable place.
         max_reachable = max(max_reachable, i + arr[i]);
-        // Walk forward by one.
         if(max_reachable == i) // If we already reached the limit, we can't
             return -1;         // improve it anymore so we have to give up.
         else if(steps <= 0) {
             // If we finished the steps,
             // it means we must have jumped somewhere between
-            // the current place and the base.
+            // the current place and a previous point.
             jumps++;
             // Thus, restore the steps so that we can reach
             // eaxctly the maximum reachable place, so that
