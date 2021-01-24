@@ -8,19 +8,20 @@ using namespace std;
 // https://codeforces.com/contest/609/problem/F?locale=en
 
 /*
-    frogs_and_mosquitoes (time complexity: O(n log n), space complexity: O(n))
+    frogs_and_mosquitoes (time complexity: O((n + m) log n), space complexity: O(n + m))
         Uses a BST a sweeping line algorithm approach and a pre-processing phase
-        to eliminate all frog sovrapposition. Then, the fall of mosquitoes is simulated.
-        The closest frog collects all possible mosquitoes, and after its tongue being
-        expanded, the invariant of the frogs being all non-overlapping is restored in O(n log n).
-        The complexity described is achieved thanks to the fact that as frogs get bigger
-        so does their probability of completely removing another frog from the space.
-        For each non-overlapping restoring, the following global cases can happen:
+        to eliminate all frog sovrapposition, in O(n log n). Then, the fall of
+        mosquitoes is simulated. The closest frog collects all possible mosquitoes,
+        and after its tongue gets expanded, the invariant of the frogs being all
+        non-overlapping is restored in amortized O(log n) time. The complexity described
+        is essentially achieved thanks to the fact that as frogs get bigger they also
+        remove other frogs in the space. For each round of non-overlapping restoring,
+        the following global cases can happen:
             - no frogs are modified       (O(  log n) complexity)
             - k frogs have to be modified (O(k log n) complexity)
         In the last case, it is easy to see that (using the assumption that all frogs are
-        non-overlapping) all frogs except one are removed from the board.
-        This ensures that the overall amortized complexity remains O(n log n).
+        non-overlapping) all frogs encountered except one are removed from the board,
+        thus ensuring that the overall amortized cost does not exceed O(n log n).
 */
 
 class frog {
